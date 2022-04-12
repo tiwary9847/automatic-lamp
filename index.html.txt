@@ -1,0 +1,134 @@
+<apex:page applyHtmlTag="false" renderAs="advanced_pdf" standardController="Contract__c" extensions="ContractExtension" showHeader="false" action="{!saveAttach}">
+    <head>
+        <style type="text/css" media="print">
+                @page{
+                    @top-center {
+                        content: element(header);
+                    }
+
+                    @bottom-left {
+                        content: element(footer);
+                    }
+                    margin-bottom: 3cm;
+                    margin-top: 4.5cm;
+                }
+
+                div.header {
+                    padding: 10px;
+                    position: running(header);
+                }
+
+                div.footer {
+                    padding: 2px;
+                    position: running(footer);
+                }
+
+                div.content {
+                    /* padding-top: 130px; */
+                    padding-bottom : 130px;
+                }
+
+                .pagenumber:before {
+                    content: counter(page);
+                }
+
+                .pagecount:before {
+                     content: counter(pages);
+                }
+            </style>
+      </head>
+
+      <div class="header">
+        <table style="width: 100%">
+            <tr>
+                <td><apex:image url="{!URLFOR($Resource.years_logo)}" width="50%" height="10%"/></td>
+                <td style="text-align: right;"><apex:image url="{!URLFOR($Resource.Logo_Pest_Terminators)}" width="70%" height="10%" /></td>
+            </tr>
+        </table>
+        <div style="font:tahoma;font-size:10px;border-top: 1px solid black;border-bottom: 1px solid black;margin-bottom:2%;padding:1%">{!$Label.Address}</div>
+     </div>
+     <div class="footer">
+        <table style="width: 100%">
+            <tr>
+                <td><apex:image url="{!URLFOR($Resource.footer)}" width="100%" height="10%" /></td>
+            </tr>
+            <tr>
+                <td>Page <span class="pagenumber"/> of <span class="pagecount"/></td>
+            </tr>
+        </table>
+        <!-- <apex:image url="{!URLFOR($Resource.footer)}" width="100%"/> -->
+    </div>
+    <div class="content">
+    <apex:form style="font:tahoma;font-size:10px;">
+        <div>
+            <table>
+                <div>
+                    <tr>
+                        <td style="text-align: center;" colspan="2">
+                            <b>
+                                TECHNO COMMERCIAL AGREEMENT<br/>
+                                BETWEEN<br/>
+                                PEST TERMINATORS<br/>
+                                AND<br/>
+                                {!Contract__c.Account__r.Name}<br/>
+                                {!Contract__c.Account__r.BillingStreet}, {!Contract__c.Account__r.BillingCity}<br/>
+                                {!Contract__c.Account__r.BillingState}, {!Contract__c.Account__r.BillingPostalCode}<br/>
+                            </b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p>In Consideration of Sum of Rupees {!Contract__c.Total_Charges_Per_Annum_In_Words__c} Only (Rs.) {!Contract__c.Total_Charges_Per_Annum__c}
+                                Per Annum plus GST tax of the contract as per hereunder to be paid by {!Contract__c.Account__r.Name},
+                                {!Contract__c.Account__r.BillingStreet}, {!Contract__c.Account__r.BillingCity},
+                                {!Contract__c.Account__r.BillingState}, {!Contract__c.Account__r.BillingPostalCode} (Hereinafter called as ‘The Owners’) to M/s. Pest
+                                Terminators. 4, Pratibha Corner, Nav Maharashtra House, Shaniwar Peth, Pune. (Hereinafter called as, ‘The
+                                Contractors’)
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <b>‘The Contractors’ shall treat the following premises of the ‘The Owners’ viz.</b><br/>
+                            <b>Premises:</b> Your premises at {!Contract__c.Account__r.BillingStreet}, {!Contract__c.Account__r.BillingCity},
+                            {!Contract__c.Account__r.BillingState}, {!Contract__c.Account__r.BillingPostalCode}<br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p style="text-align: center;"><b>PEST AND SCHEDULE OF THE TREATMENT</b></p>
+                            <apex:outputText value="{!Contract__c.Pest_and_Schedule_of_Treatment__c}" escape="false"/>
+                            <p><b>Value of the Contract: </b>The charges for various treatments would be Rupees {!Contract__c.Total_Charges_Per_Annum_In_Words__c} Only (Rs.) {!Contract__c.Total_Charges_Per_Annum__c} Per Annum.</p>
+                            <p><b>Taxes:</b> Tax 18.00% Extra</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Terms of Payment : 
+                            <apex:outputText value="{!Contract__c.Terms_of_Payment__c}" escape="false"/> <br/> <br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><br/><br/><br/><br/><br/><br/></td>
+                        <td><br/><br/><br/><br/><br/><br/></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%; text-align:left;"><b>For ‘The Contractors’</b></td>
+                        <td style="width: 50%; text-align:right;"><b>For ‘The Owners’</b></td>
+                    </tr>
+                    <tr>
+
+
+                        <td style="width: 50%; text-align:left;">Authorized Signatory</td>
+                        <td style="width: 50%; text-align:right;">Authorized Signatory</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%; text-align:left;">M/s. Pest Terminators</td>
+                        <td style="width: 50%; text-align:right;">M/s {!Contract__c.Account__r.Name}</td>
+                    </tr>
+                </div>
+            </table>
+        </div>
+    </apex:form>
+    </div>
+</apex:page>
